@@ -5,27 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React Workshop: From Basics to Advanced</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Changed font to Poppins for better readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Prevent scrollbars */
+            /* Applied the new font */
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden; /* Prevent body scroll, as slides handle their own */
         }
         .slide {
             transition: opacity 0.4s ease-in-out;
+        }
+        .scroll-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background-color: #475569; /* slate-600 */
+            border-radius: 4px;
+        }
+        .scroll-container::-webkit-scrollbar-track {
+            background-color: transparent;
         }
         .code-block {
             background-color: #1e293b; /* slate-800 */
             border-radius: 0.5rem;
             padding: 1rem;
             font-family: monospace;
-            font-size: 0.9rem;
+            /* Responsive font size for code blocks */
+            font-size: 0.8rem;
             color: #e2e8f0; /* slate-200 */
             width: 100%;
             max-width: 48rem;
             overflow-x: auto;
             white-space: pre-wrap;
             text-align: left;
+        }
+        @media (min-width: 640px) {
+            .code-block {
+                font-size: 0.875rem;
+            }
         }
         .highlight {
             color: #60a5fa; /* blue-400 */
@@ -48,183 +66,196 @@
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 flex flex-col h-screen antialiased">
+<body class="bg-slate-900 text-slate-200 flex flex-col h-screen antialiased">
 
-    <!-- Main Slides Container -->
     <main class="flex-grow relative w-full h-full">
 
         <!-- Slide 1: Title -->
-        <section class="slide flex flex-col justify-center items-center h-full w-full p-8 text-center absolute top-0 left-0">
-            <h1 class="text-6xl font-black text-sky-400 mb-4">🧩 React Workshop</h1>
-            <p class="text-3xl font-bold">Building Modern, Dynamic Web Interfaces</p>
-            
-            <div class="mt-12 flex justify-center items-center gap-12">
-                <!-- Instructor 1 -->
-                <div class="flex flex-col items-center gap-3">
-                    <img src="IMG_20250215_105427_301.webp" alt="Tapabrata Gayen" class="w-28 h-28 rounded-full object-cover border-4 border-slate-600">
-                    <p class="text-xl text-slate-300 font-medium">Tapabrata Gayen</p>
+        <section class="slide flex flex-col justify-center items-center h-full w-full p-6 md:p-8 text-center absolute top-0 left-0">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black text-sky-400 mb-4 tracking-tight">🧩 React Workshop</h1>
+                <p class="text-xl sm:text-2xl lg:text-3xl font-medium text-slate-300">Building Modern, Dynamic Web Interfaces</p>
+                <div class="mt-12 flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-12">
+                    <div class="flex flex-col items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=112&h=112&fit=crop" alt="Tapabrata Gayen" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 border-slate-600" onerror="this.onerror=null;this.src='https://placehold.co/112x112/334155/e2e8f0?text=TG';">
+                        <p class="text-lg sm:text-xl text-slate-300 font-medium">Tapabrata Gayen</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=112&h=112&fit=crop" alt="Ushree Das" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 border-slate-600" onerror="this.onerror=null;this.src='https://placehold.co/112x112/334155/e2e8f0?text=UD';">
+                        <p class="text-lg sm:text-xl text-slate-300 font-medium">Ushree Das</p>
+                    </div>
                 </div>
-                <!-- Instructor 2 -->
-                <div class="flex flex-col items-center gap-3">
-                    <img src="WhatsApp Image 2025-10-17 at 5.54.49 PM.jpeg" alt="Ushree Das" class="w-28 h-28 rounded-full object-cover border-4 border-slate-600">
-                    <p class="text-xl text-slate-300 font-medium">Ushree Das</p>
+                <div class="mt-8 text-base sm:text-lg text-slate-400">
+                    <p>React Workshop</p>
+                    <p>18th & 19th October</p>
                 </div>
+                <p class="mt-8 text-lg sm:text-xl italic text-slate-300">"From JavaScript chaos to React clarity."</p>
             </div>
-
-            <div class="mt-8 text-xl text-slate-400">
-                <p>React Workshop</p>
-                <p>18th & 19th October</p>
-            </div>
-            <p class="mt-8 text-2xl italic text-slate-300">"From JavaScript chaos to React clarity."</p>
         </section>
 
-        <!-- Slide 2: Journey -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-5xl p-8">
-                <h2 class="text-4xl font-bold mb-12 text-center">Our Two-Day Journey</h2>
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div class="bg-slate-800 p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold text-sky-400 mb-4">Day 1: The Fundamentals</h3>
-                        <ul class="list-disc list-inside space-y-3 text-lg">
-                            <li>Why was React created?</li>
-                            <li>What is the Virtual DOM?</li>
-                            <li>Thinking in Components, Props, and State.</li>
-                            <li>Understanding JSX and the rendering cycle.</li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-800 p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold text-sky-400 mb-4">Day 2: Building & Scaling</h3>
-                        <ul class="list-disc list-inside space-y-3 text-lg">
-                            <li>Client-Side Routing with React Router.</li>
-                            <li>Supercharging components with Hooks.</li>
-                            <li>Advanced concepts: Context, Custom Hooks, and Performance.</li>
-                        </ul>
+        <!-- Slide 2: Agenda -->
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+             <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-5xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-12 text-center tracking-tight">Our Two-Day Journey</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                        <div class="bg-slate-800 p-6 md:p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold text-sky-300 mb-4">Day 1: The Fundamentals</h3>
+                            <ul class="list-disc list-inside space-y-3 text-base sm:text-lg">
+                                <li>Why was React created?</li>
+                                <li>What is the Virtual DOM?</li>
+                                <li>Thinking in Components, Props, and State.</li>
+                                <li>Understanding JSX and the rendering cycle.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800 p-6 md:p-8 rounded-xl">
+                            <h3 class="text-2xl font-bold text-sky-300 mb-4">Day 2: Building & Scaling</h3>
+                            <ul class="list-disc list-inside space-y-3 text-base sm:text-lg">
+                                <li>Client-Side Routing with React Router.</li>
+                                <li>Supercharging components with Hooks.</li>
+                                <li>Advanced concepts: Context, Custom Hooks, and Performance.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Slide 3: Before React -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-4xl p-8">
-                <h2 class="text-4xl font-bold mb-6 text-center">The "Old Way" - Life Before React</h2>
-                <div class="text-left w-full">
-                    <p class="text-xl mb-4">Before React, we built websites using <span class="highlight">Vanilla JavaScript</span> or libraries like <span class="highlight">jQuery</span>.</p>
-                    <ul class="list-disc list-inside space-y-3 text-xl">
-                        <li>We directly told the browser what to change: "Find this element, change its text."</li>
-                        <li>This is called <span class="key-concept">direct DOM manipulation</span>.</li>
-                        <li>It's like giving step-by-step instructions to rebuild a wall, brick by brick.</li>
-                        <li>This worked for small sites, but became a nightmare for complex applications.</li>
-                    </ul>
+        <!-- Slide 3: The Old Way -->
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+             <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-4xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">The "Old Way" - Life Before React</h2>
+                    <div class="text-left w-full mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p>Before React, we built websites using <span class="highlight">Vanilla JavaScript</span> or libraries like <span class="highlight">jQuery</span>.</p>
+                        <ul class="list-disc list-inside space-y-3">
+                            <li>We directly told the browser what to change: "Find this element, change its text."</li>
+                            <li>This is called <span class="key-concept">direct DOM manipulation</span>.</li>
+                            <li>It's like giving step-by-step instructions to rebuild a wall, brick by brick.</li>
+                            <li>This worked for small sites, but became a nightmare for complex applications.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 4: Pain of Manual DOM -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-4xl p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Why the "Old Way" Was Hard</h2>
-                <div class="space-y-4 text-xl text-left">
-                    <p><span class="text-red-400 font-bold">State Management Chaos:</span> Keeping track of data and ensuring the UI matched it was incredibly difficult.</p>
-                    <p><span class="text-red-400 font-bold">"Spaghetti Code":</span> Code became a tangled mess, making it hard to debug or add new features.</p>
-                    <p><span class="text-red-400 font-bold">Slow Performance:</span> Every small change could force the browser to recalculate and redraw large parts of the page.</p>
-                    <p><span class="text-red-400 font-bold">UI and Data Out of Sync:</span> It was easy for the data to change but the UI to not update, causing countless bugs.</p>
+        <!-- Slide 4: Why The Old Way Was Hard -->
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-4xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">Why the "Old Way" Was Hard</h2>
+                    <div class="space-y-4 text-base sm:text-lg lg:text-xl text-left mt-8">
+                        <p><span class="text-red-400 font-semibold">State Management Chaos:</span> Keeping track of data and ensuring the UI matched it was incredibly difficult.</p>
+                        <p><span class="text-red-400 font-semibold">"Spaghetti Code":</span> Code became a tangled mess, making it hard to debug or add new features.</p>
+                        <p><span class="text-red-400 font-semibold">Slow Performance:</span> Every small change could force the browser to recalculate and redraw large parts of the page.</p>
+                        <p><span class="text-red-400 font-semibold">UI and Data Out of Sync:</span> It was easy for the data to change but the UI to not update, causing countless bugs.</p>
+                    </div>
+                    <p class="mt-8 text-base sm:text-lg lg:text-xl bg-sky-900/50 text-sky-300 p-4 rounded-lg text-center">💡 The Goal: A new way to build UIs that were <span class="font-semibold">predictable, efficient, and easier to manage.</span></p>
                 </div>
-                <p class="mt-8 text-2xl bg-sky-900/50 text-sky-300 p-4 rounded-lg text-center">💡 The Goal: A new way to build UIs that were <span class="font-bold">predictable, efficient, and easier to manage.</span></p>
             </div>
         </section>
 
         <!-- Slide 5: Virtual DOM Intro -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-4xl p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">React's Big Idea: The Virtual DOM</h2>
-                <div class="text-left w-full">
-                    <p class="text-xl mb-4">Instead of touching the real DOM for every change, React introduced a brilliant concept.</p>
-                    <ul class="list-disc list-inside space-y-3 text-xl">
-                        <li>The <span class="key-concept">Virtual DOM (VDOM)</span> is a lightweight copy of the real browser DOM.</li>
-                        <li>It's just a JavaScript object representing what the UI <span class="italic">should</span> look like.</li>
-                        <li>Because it's an object, reading from it and writing to it is <span class="highlight font-bold">incredibly fast</span>.</li>
-                    </ul>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-4xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">React's Big Idea: The Virtual DOM</h2>
+                    <div class="text-left w-full mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p>Instead of touching the real DOM for every change, React introduced a brilliant concept.</p>
+                        <ul class="list-disc list-inside space-y-3">
+                            <li>The <span class="key-concept">Virtual DOM (VDOM)</span> is a lightweight copy of the real browser DOM.</li>
+                            <li>It's just a JavaScript object representing what the UI <span class="italic">should</span> look like.</li>
+                            <li>Because it's an object, reading from it and writing to it is <span class="highlight font-semibold">incredibly fast</span>.</li>
+                        </ul>
+                    </div>
+                    <p class="mt-8 text-base sm:text-lg lg:text-xl bg-slate-800 p-4 rounded-lg text-center">🧠 <span class="font-semibold">Analogy:</span> The real DOM is the final printed book. The Virtual DOM is the editable draft in a word processor. It's much faster to change the draft.</p>
                 </div>
-                <p class="mt-8 text-2xl bg-slate-800 p-4 rounded-lg text-center">🧠 <span class="font-bold">Analogy:</span> The real DOM is the final printed book. The Virtual DOM is the editable draft in a word processor. It's much faster to change the draft.</p>
             </div>
         </section>
 
-        <!-- Slide 6: Diffing Process -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-5xl p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-8 text-center">How the Virtual DOM Works: The "Diffing" Process</h2>
-                <p class="text-xl mb-8 text-center">When your app's data (state) changes, React performs a simple, super-fast process:</p>
-                <div class="flow-diagram flex items-center justify-center space-x-4">
-                    <div>1. State Changes</div>
-                    <span>→</span>
-                    <div>2. New Virtual DOM is created</div>
-                    <span>→</span>
-                    <div>3. <span class="highlight">"Diffing"</span> compares new vs. old VDOM</div>
-                    <span>→</span>
-                    <div>4. Only changes are sent to Real DOM</div>
+        <!-- Slide 6: How VDOM Works -->
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-5xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">How the Virtual DOM Works</h2>
+                    <p class="text-base sm:text-lg lg:text-xl mb-8 text-center">When your app's data (state) changes, React performs a simple, super-fast process:</p>
+                    <div class="flow-diagram flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 w-full">
+                        <div>1. State Changes</div>
+                        <span class="transform md:rotate-0 rotate-90">→</span>
+                        <div>2. New VDOM is created</div>
+                        <span class="transform md:rotate-0 rotate-90">→</span>
+                        <div>3. <span class="highlight">Diffing</span> compares VDOMs</div>
+                        <span class="transform md:rotate-0 rotate-90">→</span>
+                        <div>4. Changes batched to Real DOM</div>
+                    </div>
+                    <p class="mt-8 text-base sm:text-lg lg:text-xl text-center max-w-4xl mx-auto">This process is why React is so fast. It minimizes the slow and expensive work of touching the real browser DOM.</p>
                 </div>
-                <p class="mt-8 text-xl text-center max-w-4xl">This process is why React is so fast. It minimizes the slow and expensive work of touching the real browser DOM.</p>
             </div>
         </section>
 
         <!-- Slide 7: Why React is Popular -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-5xl p-8">
-                <h2 class="text-4xl font-bold mb-8 text-center">Why Did React Become So Popular?</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xl text-left">
-                    <div class="bg-slate-800 p-6 rounded-lg">⚙️ <span class="font-bold">Component-Based:</span> Build your UI like LEGOs. Each piece is independent and reusable.</div>
-                    <div class="bg-slate-800 p-6 rounded-lg">⚡ <span class="font-bold">Incredible Performance:</span> The Virtual DOM makes UI updates blazingly fast.</div>
-                    <div class="bg-slate-800 p-6 rounded-lg">🧩 <span class="font-bold">Reusable Code:</span> Write a component once and use it anywhere.</div>
-                    <div class="bg-slate-800 p-6 rounded-lg">🌎 <span class="font-bold">Huge Community:</span> Backed by Meta with massive support.</div>
-                    <div class="bg-slate-800 p-6 rounded-lg col-span-1 md:col-span-2">🧠 <span class="font-bold">Declarative:</span> You "declare" what your UI should look like for a given state, and React handles the rest.</div>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-5xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">Why Did React Become So Popular?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-base sm:text-lg text-left">
+                        <div class="bg-slate-800 p-6 rounded-lg">⚙️ <span class="font-semibold">Component-Based:</span> Build your UI like LEGOs. Each piece is independent and reusable.</div>
+                        <div class="bg-slate-800 p-6 rounded-lg">⚡ <span class="font-semibold">Incredible Performance:</span> The Virtual DOM makes UI updates blazingly fast.</div>
+                        <div class="bg-slate-800 p-6 rounded-lg">🧩 <span class="font-semibold">Reusable Code:</span> Write a component once and use it anywhere.</div>
+                        <div class="bg-slate-800 p-6 rounded-lg">🌎 <span class="font-semibold">Huge Community:</span> Backed by Meta with massive support.</div>
+                        <div class="bg-slate-800 p-6 rounded-lg col-span-1 md:col-span-2">🧠 <span class="font-semibold">Declarative:</span> You "declare" what your UI should look like for a given state, and React handles the rest.</div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Slide 8: SPA -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-6xl p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">One Page, Infinite Views: The Single Page App (SPA)</h2>
-                <div class="grid grid-cols-2 gap-8 text-xl text-left w-full">
-                    <div>
-                        <h3 class="font-bold text-red-400 mb-2">Traditional Website</h3>
-                        <ul class="list-disc list-inside space-y-2">
-                            <li>Loads a new HTML page from the server for every link click.</li>
-                            <li>Causes a full-page refresh (white screen flash).</li>
-                        </ul>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">One Page, Infinite Views: The SPA</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-base sm:text-lg lg:text-xl text-left w-full mt-8">
+                        <div>
+                            <h3 class="font-semibold text-red-400 mb-2">Traditional Website</h3>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>Loads a new HTML page from the server for every link click.</li>
+                                <li>Causes a full-page refresh (white screen flash).</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <h3 class="font-semibold text-green-400 mb-2">React SPA</h3>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>Server sends just <span class="font-semibold">one</span> HTML file.</li>
+                                <li>Navigation just swaps out components on the screen.</li>
+                                <li>No page reloads!</li>
+                            </ul>
+                        </div>
                     </div>
-                     <div>
-                        <h3 class="font-bold text-green-400 mb-2">React SPA</h3>
-                        <ul class="list-disc list-inside space-y-2">
-                            <li>Server sends just <span class="font-bold">one</span> HTML file.</li>
-                            <li>Navigation just swaps out components on the screen.</li>
-                            <li>No page reloads!</li>
-                        </ul>
-                    </div>
+                     <p class="mt-8 text-base sm:text-lg lg:text-xl bg-slate-800 p-4 rounded-lg text-center">The result? A super smooth, fast, app-like experience for the user.</p>
                 </div>
-                 <p class="mt-8 text-2xl bg-slate-800 p-4 rounded-lg text-center">The result? A super smooth, fast, app-like experience for the user.</p>
             </div>
         </section>
 
         <!-- Slide 9: Thinking in Components -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-4xl p-8">
-                <h2 class="text-4xl font-bold mb-8 text-center">Thinking in Components: Divide and Conquer the UI</h2>
-                <p class="text-xl mb-6 text-center">A component is an independent, reusable piece of the UI.</p>
-                <div class="border-4 border-dashed border-sky-400 p-4 rounded-lg text-center">
-                    <p class="text-lg text-sky-400">Website UI</p>
-                    <div class="bg-slate-700 p-4 rounded-md mt-4">
-                        <p>NavbarComponent</p>
-                    </div>
-                    <div class="flex gap-4 mt-4">
-                        <div class="bg-slate-700 p-4 rounded-md w-1/4">
-                            <p>SidebarComponent</p>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-4xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">Thinking in Components</h2>
+                    <p class="text-base sm:text-lg lg:text-xl mb-6 text-center">A component is an independent, reusable piece of the UI.</p>
+                    <div class="border-4 border-dashed border-sky-400 p-4 rounded-lg text-center w-full">
+                        <p class="text-lg text-sky-400">Website UI</p>
+                        <div class="bg-slate-700 p-4 rounded-md mt-4">
+                            <p>NavbarComponent</p>
                         </div>
-                        <div class="bg-slate-700 p-4 rounded-md flex-grow space-y-2">
-                             <p>MainContentComponent</p>
-                             <div class="bg-slate-600 p-4 rounded-md">PostComponent</div>
-                             <div class="bg-slate-600 p-4 rounded-md">PostComponent</div>
+                        <div class="flex flex-col sm:flex-row gap-4 mt-4">
+                            <div class="bg-slate-700 p-4 rounded-md sm:w-1/4">
+                                <p>Sidebar</p>
+                            </div>
+                            <div class="bg-slate-700 p-4 rounded-md flex-grow space-y-2">
+                                 <p>MainContent</p>
+                                 <div class="bg-slate-600 p-4 rounded-md">Post</div>
+                                 <div class="bg-slate-600 p-4 rounded-md">Post</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -232,372 +263,403 @@
         </section>
 
         <!-- Slide 10: Props -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="max-w-4xl w-full p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Passing Data with "Props"</h2>
-                <p class="text-xl mb-4 text-left w-full">Components need data. That's where <span class="key-concept">props</span> (properties) come in.</p>
-                 <ul class="list-disc list-inside space-y-3 text-xl mb-6 text-left w-full">
-                    <li>Props pass data from a <span class="highlight">parent</span> component down to a <span class="highlight">child</span> component.</li>
-                    <li>Props are <span class="font-bold text-red-400">read-only</span>. A child cannot change the props it receives.</li>
-                </ul>
-                <div class="code-block">
-    <pre><code><span style="color: #93c5fd;">// Parent component</span>
-    function App() {
-      return &lt;<span style="color: #38bdf8;">ProfileCard</span> <span style="color: #6ee7b7;">username</span>="Tapabrata" /&gt;;
-    }
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="max-w-4xl w-full mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">Passing Data with "Props"</h2>
+                    <p class="text-base sm:text-lg lg:text-xl mb-4 text-left w-full">Components need data. That's where <span class="key-concept">props</span> (properties) come in.</p>
+                     <ul class="list-disc list-inside space-y-3 text-base sm:text-lg lg:text-xl mb-6 text-left w-full">
+                        <li>Props pass data from a <span class="highlight">parent</span> component down to a <span class="highlight">child</span> component.</li>
+                        <li>Props are <span class="font-semibold text-red-400">read-only</span>. A child cannot change the props it receives.</li>
+                    </ul>
+                    <div class="code-block">
+<pre><code><span style="color: #93c5fd;">// Parent component</span>
+function App() {
+  return &lt;<span style="color: #38bdf8;">ProfileCard</span> <span style="color: #6ee7b7;">username</span>="Tapabrata" /&gt;;
+}
 
-    <span style="color: #93c5fd;">// Child component receives 'username' as a prop</span>
-    function ProfileCard(<span style="color: #fcd34d;">props</span>) {
-      return &lt;<span style="color: #a78bfa;">h2</span>&gt;Welcome, {<span style="color: #fcd34d;">props</span>.<span style="color: #6ee7b7;">username</span>}!&lt;/<span style="color: #a78bfa;">h2</span>&gt;;
-    }</code></pre>
+<span style="color: #93c5fd;">// Child component receives 'username' as a prop</span>
+function ProfileCard(<span style="color: #fcd34d;">{ username }</span>) {
+  return &lt;<span style="color: #a78bfa;">h2</span>&gt;Welcome, {<span style="color: #6ee7b7;">username</span>}!&lt;/<span style="color: #a78bfa;">h2</span>&gt;;
+}</code></pre>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Slide 11: JSX -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-5xl p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Meet JSX: HTML + JavaScript</h2>
-                <p class="text-xl mb-4 text-center"><span class="key-concept">JSX (JavaScript XML)</span> lets you write HTML-like code directly inside your JavaScript.</p>
-                <div class="grid grid-cols-2 gap-8 w-full">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-2 text-center">Without JSX (Harder)</h3>
-                        <div class="code-block text-sm">
-    <pre><code>return React.createElement(
-      'h1',
-      null,
-      'Hello, Tapabrata!'
-    );</code></pre>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-5xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">Meet JSX: HTML in JavaScript</h2>
+                    <p class="text-base sm:text-lg lg:text-xl mb-4 text-center"><span class="key-concept">JSX (JavaScript XML)</span> lets you write HTML-like code directly inside your JavaScript.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-8 w-full mt-8">
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-2 text-center">Without JSX (Harder)</h3>
+                            <div class="code-block">
+<pre><code>return React.createElement(
+  'h1',
+  null,
+  'Hello, Tapabrata!'
+);</code></pre>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-2 text-center">With JSX (Easier)</h3>
+                            <div class="code-block">
+<pre><code>const name = "Tapabrata";
+return &lt;h1&gt;Hello, {name}&lt;/h1&gt;;</code></pre>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-2 text-center">With JSX (Easier)</h3>
-                        <div class="code-block text-sm">
-    <pre><code>const name = "Tapabrata";
-    return &lt;h1&gt;Hello, {name}&lt;/h1&gt;;</code></pre>
-                        </div>
-                    </div>
+                    <p class="mt-8 text-base sm:text-lg lg:text-xl bg-slate-800 p-4 rounded-lg text-center">🧠 <span class="font-semibold">Benefit:</span> JSX makes your code more readable and lets you visualize the UI structure while you're coding.</p>
                 </div>
-                <p class="mt-8 text-2xl bg-slate-800 p-4 rounded-lg text-center">🧠 <span class="font-bold">Benefit:</span> JSX makes your code more readable and lets you visualize the UI structure while you're coding.</p>
             </div>
         </section>
 
         <!-- Slide 12: State -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-4xl p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">A Component's Memory: "State"</h2>
-                <div class="text-left w-full">
-                    <p class="text-xl mb-4">If props are data given to a component, <span class="key-concept">state</span> is the data that a component <span class="font-bold">manages itself</span>.</p>
-                     <ul class="list-disc list-inside space-y-3 text-xl">
-                        <li>State is a component's private, internal memory.</li>
-                        <li>When the state of a component changes, React <span class="highlight font-bold">automatically re-renders</span> that component to show the new data.</li>
-                        <li>This is the key to creating dynamic, interactive UIs!</li>
-                    </ul>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-4xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">A Component's Memory: State</h2>
+                    <div class="text-left w-full mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p>If props are data given to a component, <span class="key-concept">state</span> is the data that a component <span class="font-semibold">manages itself</span>.</p>
+                         <ul class="list-disc list-inside space-y-3">
+                            <li>State is a component's private, internal memory.</li>
+                            <li>When state changes, React <span class="highlight font-semibold">automatically re-renders</span> that component to show the new data.</li>
+                            <li>This is the key to creating dynamic, interactive UIs!</li>
+                        </ul>
+                    </div>
+                    <p class="mt-8 text-base sm:text-lg lg:text-xl bg-slate-800 p-4 rounded-lg text-center">
+                        <span class="font-semibold">Example:</span> A counter component needs to remember the current count. That count is its <span class="highlight">state</span>.
+                    </p>
                 </div>
-                <p class="mt-8 text-xl bg-slate-800 p-4 rounded-lg text-center">
-                    <span class="font-bold">Example:</span> A counter component needs to remember the current count. That count is its <span class="highlight">state</span>.
-                </p>
             </div>
         </section>
 
-        <!-- Slide 13: Render Cycle -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-5xl p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-8 text-center">The React Rendering Cycle</h2>
-                <div class="flow-diagram flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 w-full text-sm md:text-base">
-                    <div>1. Initial Render</div>
-                    <span>→</span>
-                    <div>2. State Changes (e.g., button click)</div>
-                    <span>→</span>
-                    <div>3. Re-render is Triggered</div>
-                    <span>→</span>
-                    <div>4. Virtual DOM Diffing</div>
-                    <span>→</span>
-                    <div>5. Real DOM is Updated</div>
+        <!-- Slide 13: Rendering Cycle -->
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-5xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">The React Rendering Cycle</h2>
+                    <div class="flow-diagram flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 w-full text-sm sm:text-base">
+                        <div>1. Initial Render</div>
+                        <span class="transform md:rotate-0 rotate-90">→</span>
+                        <div>2. State Changes</div>
+                        <span class="transform md:rotate-0 rotate-90">→</span>
+                        <div>3. Re-render Triggered</div>
+                        <span class="transform md:rotate-0 rotate-90">→</span>
+                        <div>4. Virtual DOM Diffing</div>
+                        <span class="transform md:rotate-0 rotate-90">→</span>
+                        <div>5. Real DOM Updated</div>
+                    </div>
+                    <p class="mt-8 text-base sm:text-lg lg:text-xl text-center max-w-4xl mx-auto">This is the core loop of every React application.</p>
                 </div>
-                <p class="mt-8 text-2xl text-center max-w-4xl">This is the core loop of every React application.</p>
             </div>
         </section>
 
         <!-- Slide 14: Day 1 Recap -->
-        <section class="slide hidden flex-col justify-center items-center h-full w-full p-16 text-center absolute top-0 left-0">
-            <h2 class="text-4xl font-bold mb-8 text-sky-400">Day 1 Recap</h2>
-            <div class="space-y-4 text-2xl max-w-3xl text-center">
-                <p>React solves the problems of <span class="highlight">manual DOM manipulation</span>.</p>
-                <p>The <span class="highlight">Virtual DOM</span> makes React fast and efficient.</p>
-                <p>Apps are built from small, reusable <span class="highlight">Components</span>.</p>
-                <p>Data flows down via <span class="highlight">Props</span>.</p>
-                <p>Interactive UIs are made possible with <span class="highlight">State</span>.</p>
-                <p><span class="highlight">JSX</span> lets us write HTML in our JavaScript.</p>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full p-6 md:p-8 text-center absolute top-0 left-0">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 tracking-tight">Day 1 Recap</h2>
+                <div class="space-y-4 text-lg sm:text-xl lg:text-2xl max-w-3xl text-center mt-8">
+                    <p>React solves <span class="highlight">manual DOM manipulation</span>.</p>
+                    <p>The <span class="highlight">Virtual DOM</span> makes React fast.</p>
+                    <p>Apps are built from reusable <span class="highlight">Components</span>.</p>
+                    <p>Data flows down via <span class="highlight">Props</span>.</p>
+                    <p>Interactive UIs are made with <span class="highlight">State</span>.</p>
+                    <p><span class="highlight">JSX</span> lets us write HTML in JavaScript.</p>
+                </div>
+                <h3 class="mt-12 text-3xl font-bold">Any Questions?</h3>
             </div>
-            <h3 class="mt-12 text-3xl font-bold">Any Questions?</h3>
         </section>
         
-        <!-- Day 2 Starts Here -->
-        
         <!-- Slide 15: Day 2 Title -->
-        <section class="slide hidden flex-col justify-center items-center h-full w-full p-8 text-center absolute top-0 left-0">
-            <h1 class="text-6xl font-black text-sky-400 mb-4">🧩 Day 2: Building & Scaling</h1>
-             <div class="mt-12 text-2xl bg-slate-800 p-8 rounded-lg">
-                    <h3 class="text-3xl font-bold text-sky-400 mb-4">Agenda</h3>
-                    <ul class="list-disc list-inside space-y-3 text-left">
-                        <li>Navigation with React Router</li>
-                        <li>Supercharging components with Hooks</li>
-                        <li>Exploring advanced concepts</li>
-                    </ul>
-                </div>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full p-6 md:p-8 text-center absolute top-0 left-0">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black text-sky-400 mb-4 tracking-tight">🧩 Day 2: Building & Scaling</h1>
+                 <div class="mt-12 text-lg sm:text-xl lg:text-2xl bg-slate-800 p-6 md:p-8 rounded-lg">
+                        <h3 class="text-2xl md:text-3xl font-bold text-sky-300 mb-4">Agenda</h3>
+                        <ul class="list-disc list-inside space-y-3 text-left">
+                            <li>Navigation with React Router</li>
+                            <li>Supercharging components with Hooks</li>
+                            <li>Exploring advanced concepts</li>
+                        </ul>
+                    </div>
+            </div>
         </section>
 
         <!-- Slide 16: React Router -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="max-w-4xl w-full p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Navigation with React Router</h2>
-                <div class="text-left w-full">
-                    <p class="text-xl mb-4">How do we handle different "pages" (like `/home`, `/about`) in a Single Page App? With <span class="key-concept">React Router</span>.</p>
-                    <ul class="list-disc list-inside space-y-3 text-xl mb-6">
-                        <li>It syncs your UI with the URL in the browser's address bar.</li>
-                        <li>When the URL changes, React Router swaps out the component being displayed <span class="highlight">without a full page reload</span>.</li>
-                    </ul>
-                </div>
-                 <div class="code-block">
-    <pre><code>import { <span style="color: #fcd34d;">BrowserRouter</span>, <span style="color: #fcd34d;">Routes</span>, <span style="color: #fcd34d;">Route</span> } from 'react-router-dom';
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="max-w-4xl w-full mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">Navigation with React Router</h2>
+                    <div class="text-left w-full mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p>How do we handle different "pages" (like `/home`, `/about`) in a Single Page App? With <span class="key-concept">React Router</span>.</p>
+                        <ul class="list-disc list-inside space-y-3">
+                            <li>It syncs your UI with the URL in the browser's address bar.</li>
+                            <li>It swaps components <span class="highlight">without a full page reload</span>.</li>
+                        </ul>
+                    </div>
+                     <div class="code-block mt-6">
+<pre><code>import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-    function App() {
-      return (
-        &lt;<span style="color: #38bdf8;">BrowserRouter</span>&gt;
-          &lt;<span style="color: #38bdf8;">Routes</span>&gt;
-            &lt;<span style="color: #38bdf8;">Route</span> <span style="color: #6ee7b7;">path</span>="/" <span style="color: #6ee7b7;">element</span>={&lt;<span style="color: #a78bfa;">HomePage</span> /&gt;} /&gt;
-            &lt;<span style="color: #38bdf8;">Route</span> <span style="color: #6ee7b7;">path</span>="/about" <span style="color: #6ee7b7;">element</span>={&lt;<span style="color: #a78bfa;">AboutPage</span> /&gt;} /&gt;
-          &lt;/<span style="color: #38bdf8;">Routes</span>&gt;
-        &lt;/<span style="color: #38bdf8;">BrowserRouter</span>&gt;
-      );
-    }</code></pre>
+function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;HomePage /&gt;} /&gt;
+        &lt;Route path="/about" element={&lt;AboutPage /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</code></pre>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Slide 17: Hooks Intro -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="max-w-4xl w-full p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Function Component Superpowers: Hooks</h2>
-                <div class="text-left w-full">
-                    <p class="text-xl mb-4">In the past, to use state and other features, you had to use JavaScript <code class="key-concept">class</code> components.</p>
-                    <p class="text-2xl mb-6"><span class="key-concept">Hooks</span> are special functions that let you "hook into" React features right from your <span class="highlight">functional components</span>.</p>
-                    <ul class="list-disc list-inside space-y-3 text-xl">
-                        <li>They make your code cleaner, shorter, and easier to understand.</li>
-                        <li>All hooks start with the word <code class="key-concept">use</code> (e.g., `useState`, `useEffect`).</li>
-                    </ul>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="max-w-4xl w-full mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">Function Component Superpowers: Hooks</h2>
+                    <div class="text-left w-full mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p>To use state and other React features without writing a class, we use <span class="key-concept">Hooks</span>.</p>
+                        <p><span class="key-concept">Hooks</span> are special functions that let you "hook into" React features from your <span class="highlight">functional components</span>.</p>
+                        <ul class="list-disc list-inside space-y-3">
+                            <li>They make code cleaner, shorter, and easier to understand.</li>
+                            <li>All hooks start with the word <code class="key-concept">use</code> (e.g., `useState`, `useEffect`).</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Slide 18: useState -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="max-w-4xl w-full p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Core Hook #1: <code class="text-sky-400">useState</code></h2>
-                <div class="text-left w-full">
-                    <p class="text-xl mb-4">The most important hook. It lets you add <span class="highlight">state (memory)</span> to your functional components.</p>
-                    <p class="text-xl mb-6"><code class="key-concept">useState</code> returns an array with two things: the current state value, and a function to update it.</p>
-                </div>
-                <div class="code-block">
-    <pre><code>import { <span style="color: #fcd34d;">useState</span> } from 'react';
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="max-w-4xl w-full mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center tracking-tight mb-8">Core Hook #1: <code class="text-sky-400">useState</code></h2>
+                    <div class="text-left w-full mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p>The most important hook. It lets you add <span class="highlight">state (memory)</span> to your functional components.</p>
+                        <p><code class="key-concept">useState</code> returns an array with two things: the current state value, and a function to update it.</p>
+                    </div>
+                    <div class="code-block mt-6">
+<pre><code>import { useState } from 'react';
 
-    function Counter() {
-      <span style="color: #93c5fd;">// `count` holds the value (starts at 0)</span>
-      <span style="color: #93c5fd;">// `setCount` is the function to change it</span>
-      const [count, setCount] = <span style="color: #fcd34d;">useState</span>(0);
+function Counter() {
+  // `count` holds the value (starts at 0)
+  // `setCount` is the function to change it
+  const [count, setCount] = useState(0);
 
-      return (
-        &lt;div&gt;
-          &lt;p&gt;You clicked {count} times&lt;/p&gt;
-          &lt;button onClick={() => <span style="color: #6ee7b7;">setCount</span>(count + 1)}&gt;
-            Click me
-          &lt;/button&gt;
-        &lt;/div&gt;
-      );
-    }</code></pre>
+  return (
+    &lt;div&gt;
+      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;
+        Click me
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Slide 19: useEffect -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="max-w-4xl w-full p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Core Hook #2: <code class="text-sky-400">useEffect</code></h2>
-                <div class="text-left w-full">
-                    <p class="text-xl mb-4">What if you need to do something *after* React renders? Like fetching data, setting subscriptions, or manually changing the DOM.</p>
-                    <p class="text-xl mb-6">That's a <span class="key-concept">"side effect,"</span> and `useEffect` is the hook for it.</p>
-                </div>
-                <div class="code-block">
-    <pre><code>import { <span style="color: #fcd34d;">useState</span>, <span style="color: #fcd34d;">useEffect</span> } from 'react';
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="max-w-4xl w-full mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center tracking-tight mb-8">Core Hook #2: <code class="text-sky-400">useEffect</code></h2>
+                    <div class="text-left w-full mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p>What if you need to do something *after* React renders? Like fetching data, setting subscriptions, or manually changing the DOM.</p>
+                        <p>That's a <span class="key-concept">"side effect,"</span> and `useEffect` is the hook for it.</p>
+                    </div>
+                    <div class="code-block mt-6">
+<pre><code>import { useState, useEffect } from 'react';
 
-    function UserProfile() {
-      const [user, setUser] = <span style="color: #fcd34d;">useState</span>(null);
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
 
-      <span style="color: #fcd34d;">useEffect</span>(() => {
-        <span style="color: #93c5fd;">// This code runs after render</span>
-        fetch('api.example.com/user/1')
-          .then(res => res.json())
-          .then(data => setUser(data));
-      }, []); <span style="color: #93c5fd;">// [] means run only once</span>
+  useEffect(() => {
+    // This code runs after render
+    fetch(`api.example.com/users/${userId}`)
+      .then(res => res.json())
+      .then(data => setUser(data));
+  }, [userId]); // Re-run if userId changes
 
-      if (!user) return &lt;p&gt;Loading...&lt;/p&gt;;
-      return &lt;h1&gt;Hello, {user.name}&lt;/h1&gt;;
-    }</code></pre>
+  if (!user) return &lt;p&gt;Loading...&lt;/p&gt;;
+  return &lt;h1&gt;Hello, {user.name}&lt;/h1&gt;;
+}</code></pre>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Slide 20: useRef -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="max-w-5xl w-full p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Core Hook #3: <code class="text-sky-400">useRef</code></h2>
-                <p class="text-xl mb-4 text-center"><code class="key-concept">useRef</code> is a box for a value that persists across renders, but changing it <span class="font-bold text-red-400">does not trigger a re-render</span>.</p>
-                <div class="grid grid-cols-2 gap-8 text-xl w-full mb-6 text-left">
-                    <div><span class="font-bold">Use Case 1:</span> Accessing DOM elements directly (e.g., to focus an input).</div>
-                    <div><span class="font-bold">Use Case 2:</span> Storing a mutable value without re-rendering (e.g., a timer ID).</div>
-                </div>
-                 <div class="code-block">
-    <pre><code>import { <span style="color: #fcd34d;">useRef</span>, <span style="color: #fcd34d;">useEffect</span> } from 'react';
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="max-w-5xl w-full mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center tracking-tight mb-8">Core Hook #3: <code class="text-sky-400">useRef</code></h2>
+                    <p class="text-base sm:text-lg lg:text-xl mb-4 text-center"><code class="key-concept">useRef</code> is a box for a value that persists across renders, but changing it <span class="font-semibold text-red-400">does not trigger a re-render</span>.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-base sm:text-lg w-full mb-6 text-left mt-8">
+                        <div><span class="font-semibold">Use Case 1:</span> Accessing DOM elements directly (e.g., to focus an input).</div>
+                        <div><span class="font-semibold">Use Case 2:</span> Storing a mutable value without re-rendering (e.g., a timer ID).</div>
+                    </div>
+                     <div class="code-block">
+<pre><code>import { useRef, useEffect } from 'react';
 
-    function MyInput() {
-      const inputRef = <span style="color: #fcd34d;">useRef</span>(null);
+function MyInput() {
+  const inputRef = useRef(null);
 
-      <span style="color: #fcd34d;">useEffect</span>(() => {
-        <span style="color: #93c5fd;">// Focus the input element after mount</span>
-        inputRef.current.focus();
-      }, []);
+  useEffect(() => {
+    // Focus the input element after mount
+    inputRef.current.focus();
+  }, []);
 
-      return &lt;input ref={inputRef} type="text" /&gt;;
-    }</code></pre>
+  return &lt;input ref={inputRef} type="text" /&gt;;
+}</code></pre>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Slide 21: Context API -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="max-w-4xl p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Next Steps: Global State with the <code class="text-sky-400">Context API</code></h2>
-                <div class="text-left">
-                    <p class="text-xl mb-2"><span class="font-bold text-red-400">Problem:</span> Passing props through many layers of components ("prop drilling") is painful.</p>
-                    <p class="text-xl mb-6"><span class="font-bold text-green-400">Solution:</span> Context creates a global state that any component can access without needing props.</p>
-                    <div class="bg-slate-800 p-6 rounded-lg">
-                         <p class="text-xl mb-4">You create a <code class="key-concept">Provider</code> at the top level to hold the value. Any child can then use the <code class="key-concept">useContext</code> hook to read it.</p>
-                         <p class="text-xl"><span class="font-bold">Perfect for:</span> Theme (dark/light mode), user authentication, language preference.</p>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center tracking-tight mb-8">Global State with <code class="text-sky-400">Context API</code></h2>
+                    <div class="text-left mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p><span class="font-semibold text-red-400">Problem:</span> Passing props through many layers of components ("prop drilling") is painful.</p>
+                        <p><span class="font-semibold text-green-400">Solution:</span> Context creates a global state that any component can access without needing props.</p>
+                        <div class="bg-slate-800 p-6 rounded-lg mt-4">
+                             <p class="mb-2">You create a <code class="key-concept">Provider</code> at the top level to hold the value. Any child can then use the <code class="key-concept">useContext</code> hook to read it.</p>
+                             <p class="font-semibold">Perfect for: Theme, user authentication, language.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Slide 22: Custom Hooks -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="max-w-4xl w-full p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Next Steps: Reusing Logic with <code class="text-sky-400">Custom Hooks</code></h2>
-                <div class="w-full text-left">
-                    <p class="text-xl mb-2"><span class="font-bold text-red-400">Problem:</span> You find yourself writing the same stateful logic over and over in different components.</p>
-                    <p class="text-xl mb-6"><span class="font-bold text-green-400">Solution:</span> Extract that logic into your own reusable hook!</p>
-                </div>
-                 <div class="code-block">
-    <pre><code><span style="color: #93c5fd;">// The custom hook (starts with 'use')</span>
-    function <span style="color: #fcd34d;">useFetch</span>(url) {
-      const [data, setData] = useState(null);
-      useEffect(() => { /* ... fetch logic ... */ }, [url]);
-      return data;
-    }
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="max-w-4xl w-full mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center tracking-tight mb-8">Reusing Logic with <code class="text-sky-400">Custom Hooks</code></h2>
+                    <div class="w-full text-left mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p><span class="font-semibold text-red-400">Problem:</span> You find yourself writing the same stateful logic over and over in different components.</p>
+                        <p><span class="font-semibold text-green-400">Solution:</span> Extract that logic into your own reusable hook!</p>
+                    </div>
+                     <div class="code-block mt-6">
+<pre><code>// The custom hook (starts with 'use')
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  useEffect(() => { /* ... fetch logic ... */ }, [url]);
+  return data;
+}
 
-    <span style="color: #93c5fd;">// How to use it in any component</span>
-    function MyComponent() {
-      const users = <span style="color: #fcd34d;">useFetch</span>('/api/users');
-      <span style="color: #93c5fd;">// ... use the 'users' data</span>
-    }</code></pre>
+// How to use it in any component
+function MyComponent() {
+  const users = useFetch('/api/users');
+  // ... use the 'users' data
+}</code></pre>
+                    </div>
                 </div>
             </div>
         </section>
         
         <!-- Slide 23: Memoization -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="max-w-4xl p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Next Steps: Performance with <code class="text-sky-400">Memoization</code></h2>
-                <div class="text-left w-full">
-                    <p class="text-xl mb-2"><span class="font-bold text-red-400">Problem:</span> Some components might re-render too often, slowing things down.</p>
-                    <p class="text-xl mb-6"><span class="font-bold text-green-400">Solution:</span> Memoization is a technique to skip re-rendering if props haven't changed.</p>
-                    <div class="space-y-4 text-lg">
-                        <p><code class="key-concept">React.memo()</code>: A wrapper for your component that prevents re-rendering if props are the same.</p>
-                        <p><code class="key-concept">useMemo()</code>: A hook to memoize a calculated value so it's not re-computed on every render.</p>
-                        <p><code class="key-concept">useCallback()</code>: A hook to memoize a function so it's not re-created on every render.</p>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center tracking-tight mb-8">Performance with <code class="text-sky-400">Memoization</code></h2>
+                    <div class="text-left w-full mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p><span class="font-semibold text-red-400">Problem:</span> Some components might re-render too often, slowing things down.</p>
+                        <p><span class="font-semibold text-green-400">Solution:</span> Memoization is a technique to skip re-rendering if props haven't changed.</p>
+                        <div class="space-y-4 text-base sm:text-lg mt-4">
+                            <p><code class="key-concept">React.memo()</code>: Wraps a component to prevent re-rendering if props are the same.</p>
+                            <p><code class="key-concept">useMemo()</code>: Memoizes a calculated value so it's not re-computed on every render.</p>
+                            <p><code class="key-concept">useCallback()</code>: Memoizes a function so it's not re-created on every render.</p>
+                        </div>
                     </div>
+                    <p class="mt-8 text-base sm:text-lg lg:text-xl bg-slate-800 p-4 rounded-lg">💡 Goal: Render only what's needed, when it's needed.</p>
                 </div>
-                <p class="mt-8 text-2xl bg-slate-800 p-4 rounded-lg">💡 Goal: Render only what's needed, when it's needed.</p>
             </div>
         </section>
 
         <!-- Slide 24: Lazy Loading -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="max-w-4xl w-full p-8 flex flex-col items-center">
-                <h2 class="text-4xl font-bold mb-6 text-center">Next Steps: Faster Load Times with <code class="text-sky-400">Lazy Loading</code></h2>
-                <div class="w-full text-left">
-                    <p class="text-xl mb-2"><span class="font-bold text-red-400">Problem:</span> Downloading all your JavaScript code at once can be slow for large apps.</p>
-                    <p class="text-xl mb-6"><span class="font-bold text-green-400">Solution:</span> Code Splitting lets you split code into smaller chunks that are loaded on demand.</p>
-                </div>
-                <div class="code-block">
-    <pre><code>import React, { <span style="color: #fcd34d;">Suspense</span>, <span style="color: #fcd34d;">lazy</span> } from 'react';
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="max-w-4xl w-full mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-center tracking-tight mb-8">Faster Load Times with <code class="text-sky-400">Lazy Loading</code></h2>
+                    <div class="w-full text-left mt-8 space-y-4 text-base sm:text-lg lg:text-xl">
+                        <p><span class="font-semibold text-red-400">Problem:</span> Downloading all your JavaScript at once can be slow for large apps.</p>
+                        <p><span class="font-semibold text-green-400">Solution:</span> Code Splitting lets you split code into smaller chunks that are loaded on demand.</p>
+                    </div>
+                    <div class="code-block mt-6">
+<pre><code>import React, { Suspense, lazy } from 'react';
 
-    const AboutPage = <span style="color: #fcd34d;">lazy</span>(() => import('./AboutPage'));
+const AboutPage = lazy(() => import('./AboutPage'));
 
-    function App() {
-      return (
-        &lt;div&gt;
-          &lt;<span style="color: #38bdf8;">Suspense</span> <span style="color: #6ee7b7;">fallback</span>={&lt;p&gt;Loading...&lt;/p&gt;}&gt;
-            &lt;<span style="color: #a78bfa;">AboutPage</span> /&gt;
-          &lt;/<span style="color: #38bdf8;">Suspense</span>&gt;
-        &lt;/div&gt;
-      );
-    }</code></pre>
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Suspense fallback={&lt;p&gt;Loading...&lt;/p&gt;}&gt;
+        &lt;AboutPage /&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Slide 25: Best Practices -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0">
-            <div class="w-full max-w-4xl p-8">
-                <h2 class="text-4xl font-bold mb-8 text-center">Summary of Best Practices</h2>
-                <div class="space-y-4 text-2xl text-left">
-                    <p>✅ <span class="font-bold">Keep Components Small:</span> Single responsibility.</p>
-                    <p>✅ <span class="font-bold">Use `key` Prop in Lists:</span> Helps React identify items.</p>
-                    <p>✅ <span class="font-bold">Use the React DevTools:</span> Essential for debugging.</p>
-                    <p>✅ <span class="font-bold">Lift State Up:</span> Move shared state to a common ancestor.</p>
-                    <p>✅ <span class="font-bold">Don't Over-Optimize:</span> Use the profiler to find real bottlenecks first.</p>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 p-6 md:p-8">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <div class="w-full max-w-4xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-sky-400 mb-8 text-center tracking-tight">Summary of Best Practices</h2>
+                    <div class="space-y-4 text-lg sm:text-xl lg:text-2xl text-left mt-8">
+                        <p>✅ <span class="font-semibold">Keep Components Small:</span> Single responsibility.</p>
+                        <p>✅ <span class="font-semibold">Use `key` Prop in Lists:</span> Helps React identify items.</p>
+                        <p>✅ <span class="font-semibold">Use React DevTools:</span> Essential for debugging.</p>
+                        <p>✅ <span class="font-semibold">Lift State Up:</span> Move shared state to a common ancestor.</p>
+                        <p>✅ <span class="font-semibold">Don't Over-Optimize:</span> Use the profiler to find real bottlenecks.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Slide 26: Thank You -->
-        <section class="slide hidden flex flex-col justify-center items-center h-full w-full p-16 text-center absolute top-0 left-0">
-            <h2 class="text-5xl font-bold mb-8 text-sky-400">Thank You!</h2>
-            <p class="text-2xl mb-8">Where to Go From Here:</p>
-            <ul class="space-y-3 text-xl list-none">
-                <li><span class="font-bold">Official React Docs:</span> react.dev</li>
-                <li><span class="font-bold">Build Projects:</span> The best way to learn is by building!</li>
-                <li><span class="font-bold">Explore the Ecosystem:</span> Check out frameworks like Next.js.</li>
-            </ul>
-            <h3 class="mt-12 text-4xl font-bold">Q&A</h3>
+        <section class="slide hidden flex flex-col justify-center items-center h-full w-full p-6 md:p-8 text-center absolute top-0 left-0">
+            <div class="scroll-container w-full h-full flex flex-col justify-center items-center overflow-y-auto py-8">
+                <h2 class="text-4xl md:text-5xl font-bold mb-8 text-sky-400">Thank You!</h2>
+                <p class="text-xl md:text-2xl mb-8">Where to Go From Here:</p>
+                <ul class="space-y-3 text-lg md:text-xl list-none">
+                    <li><span class="font-semibold">Official React Docs:</span> react.dev</li>
+                    <li><span class="font-semibold">Build Projects:</span> The best way to learn is by building!</li>
+                    <li><span class="font-semibold">Explore the Ecosystem:</span> Check out frameworks like Next.js.</li>
+                </ul>
+                <h3 class="mt-12 text-3xl md:text-4xl font-bold">Q&A</h3>
+            </div>
         </section>
 
     </main>
 
-    <!-- Navigation Controls -->
-    <footer class="flex-shrink-0 p-4 bg-slate-900/80 backdrop-blur-sm flex items-center justify-between">
-        <div class="text-slate-400">React Workshop</div>
+    <footer class="flex-shrink-0 p-4 bg-slate-900/80 backdrop-blur-sm flex flex-wrap items-center justify-center sm:justify-between gap-4">
+        <div class="text-slate-400 text-center sm:text-left">React Workshop</div>
         <div class="flex items-center space-x-4">
             <button id="prevBtn" class="bg-slate-700 hover:bg-sky-500 rounded-md p-2 text-white disabled:opacity-50 disabled:cursor-not-allowed">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
             </button>
             <div id="slideCounter" class="text-lg font-medium text-slate-300">1 / 26</div>
             <button id="nextBtn" class="bg-slate-700 hover:bg-sky-500 rounded-md p-2 text-white disabled:opacity-50 disabled:cursor-not-allowed">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin-round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
             </button>
         </div>
-        <button id="fullscreenBtn" class="bg-slate-700 hover:bg-sky-500 rounded-md p-2 text-white" title="Toggle Fullscreen">
+        <button id="fullscreenBtn" class="bg-slate-700 hover:bg-sky-500 rounded-md p-2 text-white hidden sm:block" title="Toggle Fullscreen">
              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 0h-4m4 0l-5-5" /></svg>
         </button>
     </footer>
@@ -613,34 +675,32 @@
             let currentSlide = 0;
             const totalSlides = slides.length;
 
+            document.getElementById('slideCounter').textContent = `1 / ${totalSlides}`;
+
             function showSlide(index) {
                 if (index < 0 || index >= totalSlides) return;
                 
-                // Hide current slide with fade out effect
                 if (slides[currentSlide]) {
                     slides[currentSlide].classList.add('opacity-0');
                 }
                 
-                // Use a timeout to allow the fade-out transition to complete before hiding
                 setTimeout(() => {
                     if (slides[currentSlide]) {
                         slides[currentSlide].classList.add('hidden');
+                        const scroller = slides[currentSlide].querySelector('.scroll-container');
+                        if (scroller) scroller.scrollTop = 0;
                     }
                     
-                    // Update current slide index
                     currentSlide = index;
 
-                    // Show the new slide and make it visible
                     if (slides[currentSlide]) {
                         slides[currentSlide].classList.remove('hidden');
-                        // Use a short timeout to trigger the fade-in transition
                         setTimeout(() => {
                             slides[currentSlide].classList.remove('opacity-0');
                         }, 20);
                     }
-
                     updateControls();
-                }, 400); // This duration should match the CSS transition duration
+                }, 400);
             }
 
             function updateControls() {
@@ -649,44 +709,31 @@
                 nextBtn.disabled = currentSlide === totalSlides - 1;
             }
             
-            // Event Listeners for buttons
-            prevBtn.addEventListener('click', () => {
-                showSlide(currentSlide - 1);
-            });
+            prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+            nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
 
-            nextBtn.addEventListener('click', () => {
-                showSlide(currentSlide + 1);
-            });
-
-            // Keyboard navigation
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight' || e.key === ' ') { // Space bar also advances
-                    e.preventDefault(); // Prevent space from scrolling
-                    showSlide(currentSlide + 1);
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    nextBtn.click();
                 } else if (e.key === 'ArrowLeft') {
                     e.preventDefault();
-                    showSlide(currentSlide - 1);
+                    prevBtn.click();
                 }
             });
 
-            // Fullscreen functionality
             fullscreenBtn.addEventListener('click', () => {
                 if (!document.fullscreenElement) {
                     document.documentElement.requestFullscreen().catch(err => {
                         console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
                     });
                 } else {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    }
+                    if (document.exitFullscreen) document.exitFullscreen();
                 }
             });
 
-            // Initial setup
             slides.forEach((slide, index) => {
-                if (index === 0) {
-                    slide.classList.remove('hidden', 'opacity-0');
-                } else {
+                if (index !== 0) {
                     slide.classList.add('hidden', 'opacity-0');
                 }
             });
